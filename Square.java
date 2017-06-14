@@ -1,27 +1,25 @@
-
 import java.awt.*;
 
 /**
- * Write a description of class Circle here.
+ * Write a description of class Square here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Circle extends AbstractShape
+public class Square extends AbstractShape
 {
-    private int radius;
+    private int side;
     
-    
-    public Circle(int radius, Color color) {
-        this.radius = radius;
+    public Square(int side, Color color) {
+        this.side = side;
         this.color = color;
     }
     
-    public Circle(int x, int y) {
+    public Square(int x, int y) {
         this.x = x;
         this.y = y;
         color = getNextColor();
-        radius = 25;
+        side = 25;
     }
     
     public void draw(Graphics g, int x, int y) {
@@ -33,7 +31,7 @@ public class Circle extends AbstractShape
     public void draw(Graphics g) {
         
         g.setColor(color);
-        g.fillOval(x - radius , y - radius, radius * 2, radius * 2);
+        g.fillRect(x - side, y - side, side * 2, side * 2);
     }
     
     public void clickAt(int x, int y) {
@@ -41,21 +39,15 @@ public class Circle extends AbstractShape
         if (changeAspect) {
             color = getNextColor();
             changeAspect = false;
-            radius = (int)(200 * Math.random());
+            side = (int)(200 * Math.random());
         }
     }
     
-    
-    
-    
     public boolean contains(int x, int y) {
-        int xCenter = this.x;
-        int yCenter = this.y;
-        double d = Math.hypot(yCenter - y, xCenter - x);
-        return d <= radius;
+        return this.x <= x && x <= this.x + side && this.y <= y && y <= this.y + side;
     }
     
-    public int getRadius() {
-        return radius;
+    public int getSide() {
+        return side;
     }
 }
